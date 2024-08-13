@@ -10,6 +10,13 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { useSharedValue } from "react-native-reanimated";
 
 const Cards = () => {
+  const { width, height } = useWindowDimensions();
+
+  const plusIcon = require("../../../assets/plus.png");
+
+  const animatedValue = useSharedValue(0);
+  const currentIndex = useSharedValue(0);
+  const prevIndex = useSharedValue(0);
   const data = [
     {
       image: require("../../../assets/cardBackground.jpg"),
@@ -20,27 +27,43 @@ const Cards = () => {
     {
       image: require("../../../assets/cardBackground3.jpeg"),
     },
+    {
+      image: require("../../../assets/cardBackground4.jpg"),
+    },
+    {
+      image: require("../../../assets/cardBackground5.jpg"),
+    },
   ];
-  const { width, height } = useWindowDimensions();
-
-  const activeIndex = useSharedValue(0);
-
-  const plusIcon = require("../../../assets/plus.png");
 
   return (
     <GestureHandlerRootView
-      style={{ flex: 1, backgroundColor: "#252525", alignItems: "center" }}
+      style={{
+        flex: 1,
+        backgroundColor: "#252525",
+        alignItems: "center",
+        paddingTop: 50,
+      }}
     >
-      {data.map((item, index) => (
-        <Card
-          key={index}
-          item={item}
-          index={index}
-          totalCards={data.length}
-          maxVisibleItems={3}
-          activeIndex={activeIndex}
-        />
-      ))}
+      <View
+        style={{
+          flex: 1,
+          // justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        {data.map((item, index) => (
+          <Card
+            key={index}
+            item={item}
+            index={index}
+            maxVisibleItems={3}
+            animatedValue={animatedValue}
+            currentIndex={currentIndex}
+            prevIndex={prevIndex}
+            dataLength={data.length}
+          />
+        ))}
+      </View>
       <TouchableOpacity
         style={{
           width: 0.087 * height,

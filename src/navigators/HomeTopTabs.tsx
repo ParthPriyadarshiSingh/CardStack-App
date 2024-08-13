@@ -109,7 +109,10 @@ const MyTabBar = ({ state, descriptors, navigation }: any) => {
 const HomeTopTabs = () => {
   return (
     <NavigationContainer>
-      <Tab.Navigator tabBar={(props) => <MyTabBar {...props} />}>
+      <Tab.Navigator
+        tabBar={(props) => <MyTabBar {...props} />}
+        screenOptions={{ swipeEnabled: false }}
+      >
         <Tab.Screen name="Cards" component={Cards} />
         <Tab.Screen name="Travel" component={Travel} />
         <Tab.Screen name="Deals" component={Deals} />
